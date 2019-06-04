@@ -4,12 +4,6 @@ function Close-1PasswordAccount {
     )
 
     begin {
-    }
-
-    process {
-        op signin
-    }
-
-    end {
+        op signout
     }
 }

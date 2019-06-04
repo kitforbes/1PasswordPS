@@ -13,18 +13,12 @@ function Open-1PasswordAccount {
     )
 
     begin {
-    }
-
-    process {
         $sessionEnvironmentVariable = "OP_SESSION_$SubDomain"
-        if ($PSCmdlet.ParameterSetName -eq 'A') {
+        if ($PSCmdlet.ParameterSetName -eq 'Second') {
             [Environment]::SetEnvironmentVariable("$sessionEnvironmentVariable", $(op signin "$SubDomain" --output=raw))
         }
-        elseif ($PSCmdlet.ParameterSetName -eq 'B') {
+        elseif ($PSCmdlet.ParameterSetName -eq 'First') {
             [Environment]::SetEnvironmentVariable("$sessionEnvironmentVariable", $(op signin "$Url" "$SecretKey" --output=raw))
         }
-    }
-
-    end {
     }
 }
