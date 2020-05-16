@@ -8,18 +8,25 @@ function Get-1PasswordCredential {
         $Vault
     )
 
-    end {
-        $fields = (op get item "$Name" "--vault=$Vault" | ConvertFrom-Json).details.fields
+    begin {
+        Write-LogMessage -Message "Started execution"
+    }
 
-        $parameters = @{
-            TypeName     = 'System.Management.Automation.PSCredential'
-            ArgumentList = @(
-                ($fields | Where-Object { $_.name -eq 'username' }).value,
-                ($fields | Where-Object { $_.name -eq 'password' }).value
-            )
+    process {
+        try {
+            $fields = (op get item "$Name" "--vault=$Vault" | ConvertFrom-Json).details.fields
+
+            return New-Credential `
+                -UserName ($fields | Where-Object { $_.name -eq 'username' }).value `
+                -Password (ConvertTo-SecureString -String ($fields | Where-Object { $_.name -eq 'password' }).value -AsPlainText -Force)
         }
+        catch {
+            return $null;
+        }
+    }
 
-        Remove-Variable -Name 'fields' -Force -Verbose
-        return New-Object @parameters
+    end {
+        Remove-Variable -Name 'fields' -Force
+        Write-LogMessage -Message "Finished execution"
     }
 }

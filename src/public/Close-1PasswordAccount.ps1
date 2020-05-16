@@ -4,6 +4,14 @@ function Close-1PasswordAccount {
     )
 
     begin {
+        Write-LogMessage -Message "Started execution"
+    }
+
+    process {
         op signout
+    }
+
+    end {
+        Write-LogMessage -Message "Finished execution"
     }
 }

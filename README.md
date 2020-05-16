@@ -4,7 +4,7 @@ A module to interact with a 1Password account.
 
 ## Requirements
 
-- `op.exe` version `0.5.6`
+- `op.exe` version `0.10.0`
 
 ## Notes
 
