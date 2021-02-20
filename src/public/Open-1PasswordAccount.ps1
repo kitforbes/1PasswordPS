@@ -6,7 +6,7 @@ function Open-1PasswordAccount {
         $SubDomain,
         [Parameter(Mandatory = $false, ParameterSetName = 'First')]
         [String]
-        $Url = 'my.1password.com',
+        $Url = 'my.1password.eu',
         [Parameter(Mandatory = $true, ParameterSetName = 'First')]
         [String]
         $EmailAddress,
